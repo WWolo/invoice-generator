@@ -1,27 +1,78 @@
-# InvoiceGenerator
+# Aplikacja Generator Faktur
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
+## Cel projektu
 
-## Development server
+Celem projektu było stworzenie aplikacji "Generator Faktur" w Angularze, która pozwala na dynamiczne tworzenie i zarządzanie pozycjami faktury oraz wyświetlanie podsumowania z informacjami o firmie pobranymi z backendu. Projekt miał na celu zaprezentowanie umiejętności w zakresie tworzenia aplikacji frontendowej z użyciem dobrych praktyk Angulara.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Wymagania funkcjonalne i niefunkcjonalne
 
-## Code scaffolding
+- Dynamiczna lista pozycji faktury z możliwością dodawania, edytowania i usuwania.
+- Formularz walidowany z możliwością dodania pozycji zawierających:
+  - **Nazwa:** wymagane pole, od 3 do 30 znaków.
+  - **Ilość:** liczba całkowita, od 1 do 100.
+  - **Cena:** liczba całkowita, od 1 do 1 000 000.
+- Przycisk "Submit" aktywny cały czas, przekierowujący na stronę podsumowania.
+- Strona podsumowania wyświetlająca:
+  - Informacje o firmie z pliku `company.json` (dane pobierane z backendu).
+  - Listę dodanych pozycji oraz ich całkowity koszt.
+- Obsługa komunikatów błędów i stanów aplikacji, takich jak "Please add items" czy "No items".
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Technologie i narzędzia
 
-## Build
+- Angular v18 zoneless
+- Node v20.16.1
+- TypeScript v5.5
+- Tailwind CSS (do szybkiego stylowania, w produkcyjnej wersji zastąpiony przez SCSS)
+- Eslint (do lintowania kodu)
+- Prettier (do formatowania kodu)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Założenia programistyczne
 
-## Running unit tests
+- Aplikacja napisana zgodnie z dobrymi praktykami Angulara.
+- Aplikacja nie korzysta z żadnych gotowych bibliotek zewnętrznych
+- Zone.js został usunięty z projektu
+- Aplikacja korzysta z experimental i dev preview API
+- Aplikacja została przetestowana ręcznie na przeglądarkach Chrome, Edge, Firefox
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Struktura projektu
 
-## Running end-to-end tests
+```
+src/
+|- app/
+|  |- core/                     rdzeń aplikacji (serwisy, konfiguracja)
+|  |- feature/                  funkcje główne aplikacji
+|  |  |- invoice-form/          logika formularza faktury
+|  |  |  |- components/         komponenty związane z formularzem
+|  |  |- invoice-summary/       logika podsumowania faktury
+|  |     |- components/         komponenty związane z podsumowaniem
+|  |- models/                   modele danych
+|  |- shared/                   współdzielone komponenty, dyrektywy, pipy
+|  |- assets/                   zasoby statyczne, takie jak pliki JSON
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## FAQ
 
-## Further help
+### Dlaczego Tailwind CSS?
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Tailwind CSS został wykorzystany do szybkiego prototypowania stylów. W rzeczywistych projektach używałbym SCSS dla lepszego zarządzania stylami i zachowania standardów projektowych.
+
+## Uruchomienie wersji deweloperskiej
+
+1. Zainstaluj zależności:
+
+   ```bash
+   npm install
+   ```
+
+2. Uruchom aplikację:
+
+   ```bash
+   ng serve
+   ```
+
+   Aplikacja będzie dostępna pod adresem `http://localhost:4200`.
+
+## Plany rozwoju
+
+- Pokrycie kody testami jednostkowymi
+- Integracja z Web Storage API

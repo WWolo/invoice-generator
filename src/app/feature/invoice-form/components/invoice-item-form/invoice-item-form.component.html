@@ -1,0 +1,42 @@
+<div [formGroup]="itemForm()" class="bg-gray-50 rounded-md p-4 mb-4 shadow-sm">
+  <div class="grid grid-cols-7 gap-4 items-start">
+    <div class="col-span-2">
+      <input
+        formControlName="name"
+        placeholder="Name"
+        class="border border-gray-300 rounded px-2 py-1 w-full" />
+      @if (itemForm().get('name')?.invalid && itemForm().get('name')?.touched) {
+        <div class="text-red-500 text-xs mt-1">
+          Name is required and must be between 3 and 30 characters
+        </div>
+      }
+    </div>
+
+    <div class="col-span-2">
+      <input
+        formControlName="count"
+        placeholder="Count"
+        appNumberOnly
+        class="border border-gray-300 rounded px-2 py-1 w-full" />
+
+      @if (itemForm().get('count')?.invalid && itemForm().get('count')?.touched) {
+        <div class="text-red-500 text-xs mt-1">Count must be between 1 and 100</div>
+      }
+    </div>
+
+    <div class="col-span-2">
+      <input
+        formControlName="price"
+        placeholder="Price"
+        appNumberOnly
+        class="border border-gray-300 rounded px-2 py-1 w-full" />
+      @if (itemForm().get('price')?.invalid && itemForm().get('price')?.touched) {
+        <div class="text-red-500 text-xs mt-1">Price must be between 1 and 1000000</div>
+      }
+    </div>
+
+    <button type="button" (click)="remove.emit()" class="bg-red-500 text-white py-1 rounded">
+      X
+    </button>
+  </div>
+</div>
